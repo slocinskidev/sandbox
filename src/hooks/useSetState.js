@@ -4,7 +4,10 @@ const useSetState = initialState => {
   const [state, setState] = useState(initialState);
 
   const setPartialState = newState => {
-    setState({ ...state, ...newState });
+    setState(prevState => ({
+      ...prevState,
+      ...newState
+    }));
   };
 
   return [state, setPartialState];

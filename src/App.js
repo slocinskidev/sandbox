@@ -1,21 +1,20 @@
 import React, { useEffect } from 'react';
 import useSetState from './hooks/useSetState';
-import logo from './logo.svg';
-import './App.css';
 
 const App = () => {
-  const [state, setState] = useSetState({ name: 'Jan' });
+  const [state, setState] = useSetState();
 
   useEffect(() => {
-    setState({ surname: 'Słociński', name: 'Eryk' });
+    setState({ surname: 'Nowak', name: 'Jan', gender: 'Male' });
+    setState({ age: '24' });
+    setState({ surname: 'Kowalski' });
   }, []);
 
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>{`${state.name} ${state.surname}`}</p>
-      </header>
+    <div style={{ textAlign: 'center' }}>
+      <h1>useSetState hook</h1>
+      <strong>Preview in console</strong>
+      {state && console.log(state)}
     </div>
   );
 };
