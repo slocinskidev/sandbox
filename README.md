@@ -7,7 +7,12 @@ React state hook that creates setState method which works like this.setState in 
 ```jsx
 import useSetState from './hooks/useSetState';
 
-const App = () => {
   const [state, setState] = useSetState();
-
+  
+// It looks exactly like setState hook but It works like this.setState in class components.
+  setState({ surname: 'Nowak', name: 'Jan', gender: 'Male' });
+  setState({ age: '24' });
+  setState({ surname: 'Kowalski' });
+  
+// Output: {surname: "Kowalski", name: "Jan", gender: "Male", age: "24"}
 ```
