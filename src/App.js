@@ -1,20 +1,43 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import useSetState from './hooks/useSetState';
 
 const App = () => {
-  const [state, setState] = useSetState();
+  const [state, setState] = useSetState(
+    {
+      count: 0, // Initial value of counter
+      isLoading: false // Initial value of loading
+    },
+    // Callback is optional
+    () => {
+      console.log(state.count);
+      console.log(state.isLoading);
+    }
+  );
 
-  useEffect(() => {
-    setState({ surname: 'Nowak', name: 'Jan', gender: 'Male' });
-    setState({ age: '24' });
-    setState({ surname: 'Kowalski' });
-  }, []);
+  const increment = () => {
+    setState(
+      {
+        count: state.count + 1
+      },
+      () => {
+        console.log('Callback value: ', state.count);
+      }
+    );
+  };
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <h1>useSetState hook</h1>
-      <strong>Preview in console</strong>
-      {state && console.log(state)}
+      <div>
+        <h1>useSetState hook - counter example</h1>
+        <p>You clicked {state.count} times</p>
+        <p>Loading is: {String(state.isLoading)}</p>
+        <button onClick={increment}>+</button>
+        <button onClick={() => setState({ count: state.count - 1 })}>-</button>
+        <button onClick={() => setState({ isLoading: !state.isLoading })}>
+          Set loading
+        </button>
+        {state && console.log(state)}
+      </div>
     </div>
   );
 };

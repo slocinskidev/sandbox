@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const useSetState = initialState => {
+const useSetState = (initialState, callback) => {
   const [state, setState] = useState(initialState);
 
   const setPartialState = newState => {
@@ -9,6 +9,12 @@ const useSetState = initialState => {
       ...newState
     }));
   };
+
+  useEffect(() => {
+    if (callback) {
+      return callback(state);
+    }
+  }, [state, callback]);
 
   return [state, setPartialState];
 };
