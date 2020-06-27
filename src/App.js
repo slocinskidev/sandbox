@@ -2,27 +2,15 @@ import React from 'react';
 import useSetState from './hooks/useSetState';
 
 const App = () => {
-  const [state, setState] = useSetState(
-    {
-      count: 0, // Initial value of counter
-      isLoading: false // Initial value of loading
-    },
-    // Callback is optional
-    () => {
-      console.log(state.count);
-      console.log(state.isLoading);
-    }
-  );
+  const [state, setState] = useSetState({
+    count: 0, // Initial value of counter
+    isLoading: false // Initial value of loading
+  });
 
   const increment = () => {
-    setState(
-      {
-        count: state.count + 1
-      },
-      () => {
-        console.log('Callback value: ', state.count);
-      }
-    );
+    setState({
+      count: state.count + 1
+    });
   };
 
   return (
@@ -36,7 +24,6 @@ const App = () => {
         <button onClick={() => setState({ isLoading: !state.isLoading })}>
           Set loading
         </button>
-        {state && console.log(state)}
       </div>
     </div>
   );

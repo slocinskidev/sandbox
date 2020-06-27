@@ -1,20 +1,40 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-const useSetState = (initialState, callback) => {
+const useSetState = (initialState, props) => {
   const [state, setState] = useState(initialState);
 
-  const setPartialState = newState => {
-    setState(prevState => ({
-      ...prevState,
-      ...newState
-    }));
+  const callbackRef = useRef();
+
+  const setPartialState = (newState, callback) => {
+    if (callback) callbackRef.current = callback;
+
+    if (typeof newState === 'object') {
+      setState(prevState => {
+        return {
+          ...prevState,
+          ...newState
+        };
+      });
+    }
+
+    if (typeof newState === 'function') {
+      setState(prevState => {
+        return {
+          ...prevState,
+          ...newState(state, props)
+        };
+      });
+    }
+
+    if (!typeof newState === 'object' && !typeof newState === 'function')
+      throw new Error('Bad type!');
   };
 
   useEffect(() => {
-    if (callback) {
-      return callback(state);
+    if (typeof callbackRef.current === 'function') {
+      callbackRef.current();
     }
-  }, [state, callback]);
+  }, [state]);
 
   return [state, setPartialState];
 };
