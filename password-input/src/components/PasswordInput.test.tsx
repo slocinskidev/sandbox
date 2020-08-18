@@ -5,7 +5,7 @@
   2. Komponent losowo blokuje niektóre inputy na pojedyncze znaki:
     - Co to znaczy, że losowo blokujuje niektóre inputy na pojedyncze znaki? 
     - Rozumiem to tak jeżeli hasło ma 10 inputów to blokujemy losowo np. 2, 4, 6, 9, 10 input (inputy powyżej 10 są z automatu zablokowane) i użytkownik musi wprowadzić w odblokowanych miejscach hasło?
-  3. Prop onSuccess zostaje wywołany jeśli wszystkie inputy uzupełnione, wraz z literami oraz ich pozycją, które wpisał usergit sta
+  3. Prop onSuccess zostaje wywołany jeśli wszystkie inputy uzupełnione, wraz z literami oraz ich pozycją, które wpisał user
 */
 
 /* ************************************************************************************ */
